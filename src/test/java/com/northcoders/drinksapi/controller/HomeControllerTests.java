@@ -9,6 +9,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import static org.springframework.http.converter.json.Jackson2ObjectMapperBuilder.json;
+
 @AutoConfigureMockMvc
 @SpringBootTest
 public class HomeControllerTests {
@@ -35,6 +37,18 @@ public class HomeControllerTests {
 
         this.mockMvcController.perform(
                         MockMvcRequestBuilders.get("/coffeelover"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().string(expectedContent));
+    }
+
+    @Test
+    @DisplayName("Should return a Json object containing id and name of Coffee.")
+    public void testGetCoffee() throws Exception {
+
+        String expectedContent = new Coffee(1234, "Latte").toString();
+
+        this.mockMvcController.perform(
+                        MockMvcRequestBuilders.get("/coffee"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().string(expectedContent));
     }
