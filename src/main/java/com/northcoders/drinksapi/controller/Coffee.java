@@ -1,4 +1,4 @@
 package com.northcoders.drinksapi.controller;
 
-public class Coffee {
+public record Coffee(int id, String name) {
 }
