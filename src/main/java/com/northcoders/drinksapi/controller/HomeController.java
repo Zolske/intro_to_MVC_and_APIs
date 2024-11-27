@@ -15,4 +15,9 @@ public class HomeController {
     public String coffeelover(){
         return "I like coffee!";
     }
+
+    @GetMapping("/coffee")
+    public String coffee(){
+        return new Coffee(1234, "Latte" ).toString();
+    }
 }
