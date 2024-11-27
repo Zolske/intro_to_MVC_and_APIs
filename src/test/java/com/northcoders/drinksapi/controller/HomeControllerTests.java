@@ -1,5 +1,6 @@
 package com.northcoders.drinksapi.controller;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -22,6 +23,18 @@ public class HomeControllerTests {
 
         this.mockMvcController.perform(
                         MockMvcRequestBuilders.get("/"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().string(expectedContent));
+    }
+
+    @Test
+    @DisplayName("Should return a string when called.")
+    public void testGetCoffeelover() throws Exception {
+
+        String expectedContent = "I like coffee!";
+
+        this.mockMvcController.perform(
+                        MockMvcRequestBuilders.get("/coffeelover"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().string(expectedContent));
     }
